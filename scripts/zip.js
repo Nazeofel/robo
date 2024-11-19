@@ -1,5 +1,6 @@
-const commits = JSON.parse(process.env.GITHUB_PUSH_OBJECT.commits)
+const commits = JSON.parse(process.env.GITHUB_PUSH_OBJECT).commits
 
+console.log(commits)
 ;(async () => {
 	const templates = commits.filter((temp) => temp.startsWith('templats'))
 
