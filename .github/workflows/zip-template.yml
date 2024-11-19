@@ -11,14 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Zip
         run: sudo apt-get install zip unzip
 
       - name: Zip commit
         run: |
-          changed_files=$(git show --name-only --pretty="" ${{ github.sha }} )
+          changed_files=$(git show --name-only --pretty="" ${{ github.sha }})
 
           echo "changed files in the commit, ${changed_files}"
           templates_arr=()
