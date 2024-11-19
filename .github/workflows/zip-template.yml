@@ -25,10 +25,8 @@ jobs:
           echo "$changed_files" | sed 's/\/[^\/]*$//' | grep '^templates/' | sort -u > temp.txt
           mapfile -t templates_arr < temp.txt
 
-          echo "${templates_arr}"
+          echo "templates array, ${templates_arr}"
           for template in "${templates_arr[@]}"; do
             name="${template##/ }.zip"
-
-            echo "$name"
             zip $name $template
           done
