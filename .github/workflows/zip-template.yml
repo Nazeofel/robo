@@ -1,0 +1,23 @@
+name: 'Zip template'
+on:
+  push:
+    paths:
+      - 'templates/**'
+    branches:
+      - main
+
+jobs:
+  Templates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+
+      - name: Install Zip
+        run: apt-get install zip unzip
+
+      - name: Zip commit
+        run: |
+          if ${{ contains(github.ref, 'templates') }}; then
+            echo "This is a feature branch"
+          fi
