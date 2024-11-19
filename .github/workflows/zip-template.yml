@@ -21,11 +21,11 @@ jobs:
           current_commit="${GITHUB_SHA}"
           changed_files=$(git show --pretty="" --name-only $current_commit | grep '^templates/')
 
+          echo "changed files in the commit, ${changed_files}"
           templates_arr=()
           echo "$changed_files" | sed 's/\/[^\/]*$//' | grep '^templates/' | sort -u > temp.txt
           mapfile -t templates_arr < temp.txt
 
-          echo "templates array, ${templates_arr}"
           for template in "${templates_arr[@]}"; do
             name="${template##/ }.zip"
             zip $name $template
