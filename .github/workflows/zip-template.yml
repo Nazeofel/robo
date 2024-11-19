@@ -19,7 +19,7 @@ jobs:
       - name: Zip commit
         run: |
           current_commit="${GITHUB_SHA}"
-          changed_files=$(git show --pretty="" --name-only $current_commit | grep '^templates/')
+          changed_files=$(git show --pretty="" --name-only $current_commit)
 
           echo "changed files in the commit, ${changed_files}"
           templates_arr=()
