@@ -20,17 +20,15 @@ jobs:
         run: |
           current_commit="${GITHUB_SHA}"
           changed_files=$(git show --pretty="" --name-only $current_commit | grep '^templates/')
-          if [ -z "$changed_files" ]; then
-          else
-            templates_arr=()
-            echo "$changed_files" | sed 's/\/[^\/]*$//' | grep '^templates/' | sort -u > temp.txt
-            mapfile -t templates_arr < temp.txt
 
-            for template in "${templates_arr[@]}"; do
-              name="${template##/ }.zip"
+          templates_arr=()
+          echo "$changed_files" | sed 's/\/[^\/]*$//' | grep '^templates/' | sort -u > temp.txt
+          mapfile -t templates_arr < temp.txt
 
-              echo "$name"
-              zip -r $name $template &
-            done
-            wait
-          fi
+          for template in "${templates_arr[@]}"; do
+            name="${template##/ }.zip"
+
+            echo "$name"
+            zip -r $name $template &
+          done
+          wait
