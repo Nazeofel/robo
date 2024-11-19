@@ -18,6 +18,8 @@ jobs:
 
       - name: Zip commit
         run: |
+
+          echo "${{github.event.commit}}"
           changed_files=$(git show --name-only --pretty="" ${{ github.sha }})
 
           echo "changed files in the commit, ${changed_files}"
