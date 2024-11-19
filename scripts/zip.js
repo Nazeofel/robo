@@ -1,0 +1,11 @@
+const commits = process.env.GITHUB_PUSH_OBJECT.commits
+
+;(async () => {
+	const templates = commits.filter((temp) => temp.startsWith('templats'))
+
+	if (templates.length > 0) {
+		console.log(templates)
+	}
+
+	console.log('hello world')
+})()
