@@ -20,7 +20,7 @@ jobs:
         run: |
           git fetch --depth=2
           previous_commit_sha=$(git rev-parse HEAD~1)
-          current_commit=${{ github.sha }}
+          current_commit="${GITHUB_SHA}"
           changed_files=$(git diff --name-only $previous_commit $current_commit -- templates/ | grep '^templates/')
           if [ -z "$changed_files" ]; then
           else
@@ -29,8 +29,10 @@ jobs:
             mapfile -t templates_arr < temp.txt
 
             for template in "${templates_arr[@]}"; do
-            name="${template##/ }.zip"
+              name="${template##/ }.zip"
 
-            echo "$name"
-            zip -r $name $template &
+              echo "$name"
+              zip -r $name $template &
+            done
+            wait
           fi
