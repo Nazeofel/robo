@@ -18,7 +18,7 @@ jobs:
 
       - name: Zip commit
         run: |
-          changed_files=$(git diff --name-only  ${{ github.sha }} HEAD)
+          changed_files=$(git diff --name-only  ${{ github.sha }} HEAD~1)
 
           echo "changed files in the commit, ${changed_files}"
           templates_arr=()
