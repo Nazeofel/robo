@@ -16,21 +16,10 @@ jobs:
       - name: Install Zip
         run: sudo apt-get install zip unzip
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
       - name: Zip commit
-        run: |
-          temparr=${{ github.event.commits }}
-          changed_files=$(git show --name-only --pretty="" ${{ github.sha }})
-
-          for x in in "${temparr[@]}"; do
-            echo "$x"
-          done
-
-          echo "changed files in the commit, ${changed_files}"
-          templates_arr=()
-          echo "$changed_files" | sed 's/\/[^\/]*$//' | grep '^templates/' | sort -u > temp.txt
-          mapfile -t templates_arr < temp.txt
-
-          for template in "${templates_arr[@]}"; do
-            name="${template##/ }.zip"
-            zip $name $template
-          done
+        run: node .github/zip.js
