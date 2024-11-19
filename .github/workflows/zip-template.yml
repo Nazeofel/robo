@@ -18,8 +18,12 @@ jobs:
 
       - name: Zip commit
         run: |
-          echo "${{ github.event.commits }}"
+          temparr=${{ github.event.commits }}
           changed_files=$(git show --name-only --pretty="" ${{ github.sha }})
+
+          for x in in "${temparr[@]}"; do
+            echo "$x"
+          done
 
           echo "changed files in the commit, ${changed_files}"
           templates_arr=()
