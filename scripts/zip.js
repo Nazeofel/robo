@@ -1,4 +1,4 @@
-const commits = JSON.parse(process.env.GITHUB_PUSH_OBJECT).commits
+const commits = JSON.parse(process.env.GITHUB_PUSH_OBJECT)
 
 console.log(commits)
 ;(async () => {
