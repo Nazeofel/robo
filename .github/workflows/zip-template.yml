@@ -18,6 +18,7 @@ jobs:
 
       - name: Zip commit
         run: |
+          git fetch --depth=2
           changed_files=$(git diff --name-only HEAD~1 HEAD -- templates/ | grep '^templates/')
           if [ -z "$changed_files" ]; then
           else
