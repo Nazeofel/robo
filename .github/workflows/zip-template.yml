@@ -22,6 +22,6 @@ jobs:
           node-version: '20'
 
       - name: Zip commit
-        run: node scripts/zip.js
         env:
           GITHUB_PUSH_OBJECT: ${{ toJson(github.event) }}
+        run: node scripts/zip.js
