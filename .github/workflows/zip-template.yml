@@ -18,10 +18,8 @@ jobs:
 
       - name: Zip commit
         run: |
-          git fetch --depth=2
-          previous_commit_sha=$(git rev-parse HEAD~1)
           current_commit="${GITHUB_SHA}"
-          changed_files=$(git diff --name-only $previous_commit $current_commit -- templates/ | grep '^templates/')
+          changed_files=$(git show --pretty="" --name-only $current_commit | grep '^templates/')
           if [ -z "$changed_files" ]; then
           else
             templates_arr=()
