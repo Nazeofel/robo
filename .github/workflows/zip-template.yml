@@ -18,8 +18,7 @@ jobs:
 
       - name: Zip commit
         run: |
-          git checkout main
-          changed_files=$(git diff --name-only HEAD~1 HEAD)
+          changed_files=$(git diff --name-only HEAD~1 HEAD -- templates/ | grep '^templates/)
           if [ -z "$changed_files" ]; then
           else
             templates_arr=()
