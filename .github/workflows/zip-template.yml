@@ -30,4 +30,4 @@ jobs:
 
             echo "$name"
             zip -r $name $template &
-          f
+          fi
