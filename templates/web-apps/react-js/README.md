@@ -6,7 +6,7 @@
 
 Welcome to your fresh **[Robo.js](https://github.com/Wave-Play/robo)** project!
 
-Build, deploy, and maintain your hell world ffDiscfffffffffffffffffffffffffffordffffffffffwefewf activities with ease. With Robo.js as your guide, you'll experience a seamless, [file-based setup](https://docs.roboplay.dev/docs/basics/overview#the-robojs-file-structure), an [integrated database](https://docs.roboplay.dev/docs/basics/flashcore), [TypeScript support](https://docs.roboplay.dev/docs/advanced/typescript), and a multitude of [plugin-powered skills](https://docs.roboplay.dev/docs/advanced/plugins) to unlock along the way.ffff
+Build, deploy, and maintain your hell world ffDiscfffffffffffffffffffffffffffffordffffffffffwefewf activities with ease. With Robo.js as your guide, you'll experience a seamless, [file-based setup](https://docs.roboplay.dev/docs/basics/overview#the-robojs-file-structure), an [integrated database](https://docs.roboplay.dev/docs/basics/flashcore), [TypeScript support](https://docs.roboplay.dev/docs/advanced/typescript), and a multitude of [plugin-powered skills](https://docs.roboplay.dev/docs/advanced/plugins) to unlock along the way.ffff
 fd
 _Ready to embark on this adventure?_
 
