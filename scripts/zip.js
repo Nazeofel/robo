@@ -6,13 +6,11 @@ const { spawn } = require('child_process')
 ;(async () => {
 	const commits = gh.commits
 	const templates = await getAllTemplates()
-
-	console.log(templates)
 	if (commits.length > 0) {
 		commits.forEach((commit) => {
 			const id = commit.id
 
-			const process = spawn('git', ['show', '--name-only', '--pretty=""', id])
+			const process = spawn('git', ['show', '--name-only', '--pretty=', '', id])
 
 			// Capture the output
 			let output = []
@@ -58,8 +56,6 @@ async function getAllTemplates() {
 			}
 		})
 		const data = await response.json()
-
-		console.log(data)
 		templates.push(...data.filter((item) => item.type === 'dir').map((folder) => folder.path))
 	}
 
