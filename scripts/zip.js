@@ -1,5 +1,7 @@
 const gh = JSON.parse(process.env.GITHUB_PUSH_OBJECT)
 const token = process.env.TOKEN
+
+console.log(token)
 const { spawn } = require('child_process')
 ;(async () => {
 	const commits = gh.commits
