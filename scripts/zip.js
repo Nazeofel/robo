@@ -1,7 +1,6 @@
 const gh = JSON.parse(process.env.GITHUB_PUSH_OBJECT)
+const token = process.env.TOKEN
 const { spawn } = require('child_process')
-
-console.log(gh)
 ;(async () => {
 	const commits = gh.commits
 	const templates = await getAllTemplates()
@@ -26,11 +25,18 @@ console.log(gh)
 
 			process.on('close', (code) => {
 				if (code === 0) {
-					// creating zip files
-					// const filterCommitedTemplates = output.filter((x) => !x.startsWith('templates'))
-					// if (filterCommitedTemplates.length > 0) {
-					// 	filterCommitedTemplates.map((templateCommited) => templates.includes(templateCommited))
-					// }
+					//	creating zip files
+					const filterCommitedTemplates = output.filter((x) => !x.startsWith('templates'))
+					if (filterCommitedTemplates.length > 0) {
+						const projectToZip = []
+						for (let i = 0; i < filterCommitedTemplates.length; ++i) {
+							for (let j = 0; j < templates.length; ++j) {
+								if (filterCommitedTemplates[i].contains(templates[j])) {
+									projectToZip.push(templates[j])
+								}
+							}
+						}
+					}
 				} else {
 					console.error(`Git process exited with code ${code}`)
 				}
@@ -42,12 +48,15 @@ console.log(gh)
 async function getAllTemplates() {
 	const paths = ['discord-activities', 'discord-bot', 'plugin', 'web-apps']
 	const templates = []
-
 	for (const path of paths) {
-		const url = `https://api.github.com/repos/Nazeofel/robo.js/contents/templates/${path}`
-		const response = await fetch(url)
+		const url = `https://api.github.com/repos/nazeofel/robo/contents/templates/${path}`
+		const response = await fetch(url, {
+			headers: {
+				Authorization: `token ${token}`
+			}
+		})
 		const data = await response.json()
-		templates.push(...data.filter((item) => item.type === 'dir').map((folder) => 'templates' + path + folder.name))
+		templates.push(...data.filter((item) => item.type === 'dir').map((folder) => folder.path))
 	}
 
 	return templates

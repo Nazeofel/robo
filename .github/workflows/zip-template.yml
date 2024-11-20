@@ -24,4 +24,5 @@ jobs:
       - name: Zip commit
         env:
           GITHUB_PUSH_OBJECT: ${{ toJson(github.event) }}
+          TOKEN: ${{ secrets.ZIPTOKEN }}
         run: node scripts/zip.js
