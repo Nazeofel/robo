@@ -16,7 +16,8 @@ const { spawn } = require('child_process')
 			let output = []
 
 			process.stdout.on('data', (data) => {
-				console.log('DATASAAA', data)
+				const enc = new TextDecoder('utf-8').decode(data)
+				console.log(enc)
 				output.push(data)
 			})
 
