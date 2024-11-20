@@ -4,7 +4,9 @@ const { spawn } = require('child_process')
 console.log(gh)
 ;(async () => {
 	const commits = gh.commits
+	const templates = await getAllTemplates()
 
+	console.log(templates)
 	if (commits.length > 0) {
 		commits.forEach((commit) => {
 			const id = commit.id
@@ -25,10 +27,10 @@ console.log(gh)
 			process.on('close', (code) => {
 				if (code === 0) {
 					// creating zip files
-					const templates = output.filter((x) => !x.startsWith('templates'))
-
-					if (templates.length > 0) {
-					}
+					// const filterCommitedTemplates = output.filter((x) => !x.startsWith('templates'))
+					// if (filterCommitedTemplates.length > 0) {
+					// 	filterCommitedTemplates.map((templateCommited) => templates.includes(templateCommited))
+					// }
 				} else {
 					console.error(`Git process exited with code ${code}`)
 				}
@@ -37,4 +39,16 @@ console.log(gh)
 	}
 })()
 
-async function getAllTemplates() {}
+async function getAllTemplates() {
+	const paths = ['discord-activities', 'discord-bot', 'plugin', 'web-apps']
+	const templates = []
+
+	for (const path of paths) {
+		const url = `https://api.github.com/repos/Nazeofel/robo.js/contents/templates/${path}`
+		const response = await fetch(url)
+		const data = await response.json()
+		templates.push(...data.filter((item) => item.type === 'dir').map((folder) => 'templates' + path + folder.name))
+	}
+
+	return templates
+}
