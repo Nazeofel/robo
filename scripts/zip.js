@@ -10,7 +10,7 @@ const { spawn } = require('child_process')
 		commits.forEach((commit) => {
 			const id = commit.id
 
-			const process = spawn('git', ['show', '--name-only', '--pretty=', '', id])
+			const process = spawn('git', ['show', '--name-only', '--pretty=', id])
 
 			// Capture the output
 			let output = []
