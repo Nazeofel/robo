@@ -56,6 +56,8 @@ async function getAllTemplates() {
 			}
 		})
 		const data = await response.json()
+
+		console.log(data)
 		templates.push(...data.filter((item) => item.type === 'dir').map((folder) => folder.path))
 	}
 
