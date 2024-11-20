@@ -1,5 +1,5 @@
 const gh = JSON.parse(process.env.GITHUB_PUSH_OBJECT)
-import { spawn } from 'child_process'
+const { spawn } = require('child_process')
 
 console.log(gh)
 ;(async () => {
