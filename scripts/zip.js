@@ -46,7 +46,7 @@ const { spawn } = require('child_process')
 })()
 
 async function getAllTemplates() {
-	const paths = ['discord-activities', 'discord-bot', 'plugin', 'web-apps']
+	const paths = ['discord-activities', 'discord-bots', 'plugins', 'web-apps']
 	const templates = []
 	for (const path of paths) {
 		const url = `https://api.github.com/repos/nazeofel/robo/contents/templates/${path}`
