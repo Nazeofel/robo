@@ -26,7 +26,7 @@ const { execSync } = require('child_process')
 				if (templatesToZip.length > 0) {
 					console.log(new TextDecoder('utf-8').decode(execSync('ls -la')))
 					templatesToZip.forEach((template) => {
-						execSync(`zip -r /zips/${template}.zip /${template}`)
+						new TextDecoder('utf-8').decode(execSync(`zip -r /zips/${template}.zip /${template}`))
 					})
 				}
 			} else {
