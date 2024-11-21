@@ -40,7 +40,8 @@ const path = require('path')
 							fs.mkdirSync(outputDir, { recursive: true })
 						}
 
-						execSync(`zip -r ${outputZip} ${templatePath}`)
+						execSync(`zip -r ${outputZip} templates/${templatePath}`)
+						// templatePath ex: web-apps/react-js
 						execSync(`b2 upload-file ${BUCKET_NAME} ${outputDir} ${templatePath}`)
 					})
 				}
