@@ -2,6 +2,9 @@ const gh = JSON.parse(process.env.GITHUB_PUSH_OBJECT)
 const token = process.env.TOKEN
 const repoData = process.env.REPO_DATA
 
+const REPO_OWNER = repoData.split('/')[0]
+const REPO_NAME = repoData.split('/')[1]
+
 console.log(repoData)
 ;(async () => {
 	const commits = gh.commits
@@ -11,12 +14,11 @@ console.log(repoData)
 			const id = commit.id
 			const committedFiles = await getCommittedFiles(id)
 
-			console.log(committedFiles)
 			if (committedFiles.length > 0) {
 				const projectToZip = []
 				for (let i = 0; i < committedFiles.length; ++i) {
 					for (let j = 0; j < templates.length; ++j) {
-						if (committedFiles[i].filename.contains(templates[j])) {
+						if (committedFiles[i].filename.includes(templates[j])) {
 							projectToZip.push(templates[j])
 						}
 					}
@@ -34,7 +36,7 @@ async function getAllTemplates() {
 	const paths = ['discord-activities', 'discord-bots', 'plugins', 'web-apps']
 	const templates = []
 	for (const path of paths) {
-		const url = `https://api.github.com/repos/nazeofel/robo/contents/templates/${path}`
+		const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/templates/${path}`
 		const response = await fetch(url, {
 			headers: {
 				Authorization: `token ${token}`
@@ -48,7 +50,7 @@ async function getAllTemplates() {
 }
 
 async function getCommittedFiles(id) {
-	const url = `https://api.github.com/repos/Nazeofel/robo/commits/${id}`
+	const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits/${id}`
 	const response = await fetch(url, {
 		headers: {
 			Authorization: `token ${token}`
