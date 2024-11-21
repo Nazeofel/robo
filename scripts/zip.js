@@ -1,48 +1,27 @@
 const gh = JSON.parse(process.env.GITHUB_PUSH_OBJECT)
 const token = process.env.TOKEN
 
-console.log(token)
 const { spawn } = require('child_process')
 ;(async () => {
 	const commits = gh.commits
 	const templates = await getAllTemplates()
 	if (commits.length > 0) {
-		commits.forEach((commit) => {
+		commits.forEach(async (commit) => {
 			const id = commit.id
+			const committedFiles = await getCommittedFiles(id)
 
-			const process = spawn('git', ['show', '--name-only', '--pretty=', id])
-
-			// Capture the output
-			let output = []
-
-			process.stdout.on('data', (data) => {
-				const enc = new TextDecoder('utf-8').decode(data)
-				console.log(enc)
-				output.push(data)
-			})
-
-			process.stderr.on('data', (error) => {
-				console.error(`Error: ${error}`)
-			})
-
-			process.on('close', (code) => {
-				if (code === 0) {
-					//	creating zip files
-					const filterCommitedTemplates = output.filter((x) => !x.startsWith('templates'))
-					if (filterCommitedTemplates.length > 0) {
-						const projectToZip = []
-						for (let i = 0; i < filterCommitedTemplates.length; ++i) {
-							for (let j = 0; j < templates.length; ++j) {
-								if (filterCommitedTemplates[i].contains(templates[j])) {
-									projectToZip.push(templates[j])
-								}
-							}
+			if (committedFiles.length > 0) {
+				const projectToZip = []
+				for (let i = 0; i < committedFiles.length; ++i) {
+					for (let j = 0; j < templates.length; ++j) {
+						if (filterCommitedTemplates[i].contains(templates[j])) {
+							projectToZip.push(templates[j])
 						}
 					}
-				} else {
-					console.error(`Git process exited with code ${code}`)
 				}
-			})
+
+				console.log(projectToZip)
+			}
 		})
 	}
 })()
@@ -62,4 +41,18 @@ async function getAllTemplates() {
 	}
 
 	return templates
+}
+
+async function getCommittedFiles(id) {
+	const url = `https://api.github.com/repos/Nazeofel/robo/commits/${id}`
+	const response = await fetch(url, {
+		headers: {
+			Authorization: `token ${token}`
+		}
+	})
+
+	const json = await response.json()
+	const files = json.files
+
+	return files.filter((file) => file.filename.startsWith('templates'))
 }
