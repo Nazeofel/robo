@@ -8,12 +8,11 @@ const token = process.env.TOKEN
 			const id = commit.id
 			const committedFiles = await getCommittedFiles(id)
 
-			console.log(committedFiles)
 			if (committedFiles.length > 0) {
 				const projectToZip = []
 				for (let i = 0; i < committedFiles.length; ++i) {
 					for (let j = 0; j < templates.length; ++j) {
-						if (committedFiles[i].contains(templates[j])) {
+						if (committedFiles[i].filename.contains(templates[j])) {
 							projectToZip.push(templates[j])
 						}
 					}
@@ -55,9 +54,7 @@ async function getCommittedFiles(id) {
 	const json = await response.json()
 	const files = json.files
 
-	return files.map((file) => {
-		if (file.filename.startsWith('templates')) {
-			return file.filename
-		}
+	return files.filter((file) => {
+		return file.filename.startsWith('templates')
 	})
 }
