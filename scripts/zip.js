@@ -1,7 +1,5 @@
 const gh = JSON.parse(process.env.GITHUB_PUSH_OBJECT)
 const token = process.env.TOKEN
-
-const { spawn } = require('child_process')
 ;(async () => {
 	const commits = gh.commits
 	const templates = await getAllTemplates()
@@ -10,17 +8,20 @@ const { spawn } = require('child_process')
 			const id = commit.id
 			const committedFiles = await getCommittedFiles(id)
 
+			console.log(committedFiles)
 			if (committedFiles.length > 0) {
-				const projectToZip = []
-				for (let i = 0; i < committedFiles.length; ++i) {
-					for (let j = 0; j < templates.length; ++j) {
-						if (committedFiles[i].contains(templates[j])) {
-							projectToZip.push(templates[j])
-						}
-					}
-				}
+				// const projectToZip = []
+				// for (let i = 0; i < committedFiles.length; ++i) {
+				// 	for (let j = 0; j < templates.length; ++j) {
+				// 		if (committedFiles[i].contains(templates[j])) {
+				// 			projectToZip.push(templates[j])
+				// 		}
+				// 	}
+				// }
 
 				console.log(projectToZip)
+			} else {
+				console.log('ERROR: not committed file and Job still ran ?')
 			}
 		})
 	}
