@@ -14,7 +14,7 @@ const { spawn } = require('child_process')
 				const projectToZip = []
 				for (let i = 0; i < committedFiles.length; ++i) {
 					for (let j = 0; j < templates.length; ++j) {
-						if (filterCommitedTemplates[i].contains(templates[j])) {
+						if (committedFiles[i].contains(templates[j])) {
 							projectToZip.push(templates[j])
 						}
 					}
