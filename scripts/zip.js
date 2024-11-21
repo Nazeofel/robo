@@ -1,10 +1,15 @@
 const gh = JSON.parse(process.env.GITHUB_PUSH_OBJECT)
 const token = process.env.TOKEN
 const repoData = process.env.REPO_DATA
+const BUCKET_NAME = 'templates-robo-js'
 
 const REPO_OWNER = repoData.split('/')[0]
 const REPO_NAME = repoData.split('/')[1]
 const { execSync } = require('child_process')
+
+const fs = require('fs')
+const path = require('path')
+
 ;(async () => {
 	const commits = gh.commits
 	const templates = await getAllTemplates()
@@ -24,9 +29,18 @@ const { execSync } = require('child_process')
 				}
 
 				if (templatesToZip.length > 0) {
-					console.log(new TextDecoder('utf-8').decode(execSync('ls -la')))
 					templatesToZip.forEach((template) => {
-						new TextDecoder('utf-8').decode(execSync(`zip -r /zips/${template}.zip /${template}`))
+						const templateName = template.split('/')[template.split('/').length - 1]
+						const templatePath = template.slice(10)
+						const outputDir = path.resolve(`zips/${templatePath}`)
+						const outputZip = path.join(outputDir, templateName)
+
+						if (!fs.existsSync(outputDir)) {
+							fs.mkdirSync(outputDir, { recursive: true })
+							execSync(`zip -r ${outputZip} ${templatePath}`)
+						}
+
+						execSync(`b2 upload-file ${BUCKET_NAME} ${outputDir} ${templatePath}`)
 					})
 				}
 			} else {
