@@ -10,14 +10,14 @@ const token = process.env.TOKEN
 
 			console.log(committedFiles)
 			if (committedFiles.length > 0) {
-				// const projectToZip = []
-				// for (let i = 0; i < committedFiles.length; ++i) {
-				// 	for (let j = 0; j < templates.length; ++j) {
-				// 		if (committedFiles[i].contains(templates[j])) {
-				// 			projectToZip.push(templates[j])
-				// 		}
-				// 	}
-				// }
+				const projectToZip = []
+				for (let i = 0; i < committedFiles.length; ++i) {
+					for (let j = 0; j < templates.length; ++j) {
+						if (committedFiles[i].contains(templates[j])) {
+							projectToZip.push(templates[j])
+						}
+					}
+				}
 
 				console.log(projectToZip)
 			} else {
@@ -59,5 +59,6 @@ async function getCommittedFiles(id) {
 		if (file.filename.startsWith('templates')) {
 			return file.filename
 		}
+		return
 	})
 }
