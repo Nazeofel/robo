@@ -5,8 +5,9 @@ const repoData = process.env.REPO_DATA
 const REPO_OWNER = repoData.split('/')[0]
 const REPO_NAME = repoData.split('/')[1]
 
-console.log(repoData)
-;(async () => {
+const child_process = require('child_process')
+
+const { pid } = require('process')(async () => {
 	const commits = gh.commits
 	const templates = await getAllTemplates()
 	if (commits.length > 0) {
@@ -15,16 +16,20 @@ console.log(repoData)
 			const committedFiles = await getCommittedFiles(id)
 
 			if (committedFiles.length > 0) {
-				const projectToZip = []
+				const templatesToZip = []
 				for (let i = 0; i < committedFiles.length; ++i) {
 					for (let j = 0; j < templates.length; ++j) {
 						if (committedFiles[i].filename.includes(templates[j])) {
-							projectToZip.push(templates[j])
+							templatesToZip.push(templates[j])
 						}
 					}
 				}
 
-				console.log(projectToZip)
+				if (templatesToZip.length > 0) {
+					templatesToZip.forEach((template) => {
+						child_process.execSync(`zip zips/${template}.zip ${template}`)
+					})
+				}
 			} else {
 				console.log('ERROR: not committed file and Job still ran ?')
 			}
