@@ -25,4 +25,5 @@ jobs:
         env:
           GITHUB_PUSH_OBJECT: ${{ toJson(github.event) }}
           TOKEN: ${{ secrets.ZIPTOKEN }}
+          REPO_DATA: ${{ github.repository }}
         run: node scripts/zip.js

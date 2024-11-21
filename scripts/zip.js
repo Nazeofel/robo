@@ -1,5 +1,8 @@
 const gh = JSON.parse(process.env.GITHUB_PUSH_OBJECT)
 const token = process.env.TOKEN
+const repoData = process.env.REPO_DATA
+
+console.log(repoData)
 ;(async () => {
 	const commits = gh.commits
 	const templates = await getAllTemplates()
@@ -8,6 +11,7 @@ const token = process.env.TOKEN
 			const id = commit.id
 			const committedFiles = await getCommittedFiles(id)
 
+			console.log(committedFiles)
 			if (committedFiles.length > 0) {
 				const projectToZip = []
 				for (let i = 0; i < committedFiles.length; ++i) {
