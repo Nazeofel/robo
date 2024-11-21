@@ -54,5 +54,9 @@ async function getCommittedFiles(id) {
 	const json = await response.json()
 	const files = json.files
 
-	return files.filter((file) => file.filename.startsWith('templates'))
+	return files.filter((file) => {
+		if (file.filename.startsWith('templates')) {
+			return file.filename
+		}
+	})
 }
