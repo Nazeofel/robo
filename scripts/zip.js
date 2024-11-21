@@ -33,14 +33,14 @@ const path = require('path')
 						const templateName = template.split('/')[template.split('/').length - 1]
 						const templatePath = template.slice(10)
 
-						const outputDir = path.resolve(`zips/${templatePath.replace(`.${templateName}`, '')}`)
+						const outputDir = path.resolve(`zips/${templatePath.replace(`/${templateName}`, '')}`)
 						const outputZip = path.join(outputDir, templateName)
 
 						if (!fs.existsSync(outputDir)) {
 							fs.mkdirSync(outputDir, { recursive: true })
-							execSync(`zip -r ${outputZip} ${templatePath}`)
 						}
 
+						execSync(`zip -r ${outputZip} ${templatePath}`)
 						execSync(`b2 upload-file ${BUCKET_NAME} ${outputDir} ${templatePath}`)
 					})
 				}
