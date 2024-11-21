@@ -3,11 +3,9 @@ const token = process.env.TOKEN
 const repoData = process.env.REPO_DATA
 
 const REPO_OWNER = repoData.split('/')[0]
-const REPO_NAME = repoData.split('/')[1]
-
-const child_process = require('child_process')
-
-const { pid } = require('process')(async () => {
+const REPO_NAME = repoDat
+const { spawn } = require('child_process')
+;(async () => {
 	const commits = gh.commits
 	const templates = await getAllTemplates()
 	if (commits.length > 0) {
