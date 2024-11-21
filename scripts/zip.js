@@ -41,8 +41,9 @@ const path = require('path')
 						}
 
 						execSync(`zip -r ${outputZip} templates/${templatePath}`)
-						// templatePath ex: web-apps/react-js
-						execSync(`b2 upload-file ${BUCKET_NAME} ${outputDir} ${templatePath}`)
+
+						const templateZippedPath = templatePath + '/' + templateName
+						execSync(`b2 file upload ${BUCKET_NAME} ${outputDir} ${templateZippedPath}`)
 					})
 				}
 			} else {
