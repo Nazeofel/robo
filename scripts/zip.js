@@ -32,7 +32,8 @@ const path = require('path')
 					templatesToZip.forEach((template) => {
 						const templateName = template.split('/')[template.split('/').length - 1]
 						const templatePath = template.slice(10)
-						const outputDir = path.resolve(`zips/${templatePath}`).slice(4)
+
+						const outputDir = path.resolve(`zips/${templatePath.replace(`.${templateName}`, '')}`)
 						const outputZip = path.join(outputDir, templateName)
 
 						if (!fs.existsSync(outputDir)) {
