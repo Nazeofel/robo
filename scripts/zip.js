@@ -24,7 +24,7 @@ const { execSync } = require('child_process')
 				}
 
 				if (templatesToZip.length > 0) {
-					execSync('ls')
+					execSync('ls -la')
 					// templatesToZip.forEach((template) => {
 					// 	execSync(`zip -r zips/${template}.zip ${template}`)
 					// })
