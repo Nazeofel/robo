@@ -24,10 +24,10 @@ const { execSync } = require('child_process')
 				}
 
 				if (templatesToZip.length > 0) {
-					console.log(execSync('ls -la'))
-					// templatesToZip.forEach((template) => {
-					// 	execSync(`zip -r zips/${template}.zip ${template}`)
-					// })
+					console.log(new TextDecoder('utf-8').decode(execSync('ls -la')))
+					templatesToZip.forEach((template) => {
+						execSync(`zip -r /zips/${template}.zip /${template}`)
+					})
 				}
 			} else {
 				console.log('ERROR: not committed file and Job still ran ?')
