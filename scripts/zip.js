@@ -3,8 +3,8 @@ const token = process.env.TOKEN
 const repoData = process.env.REPO_DATA
 
 const REPO_OWNER = repoData.split('/')[0]
-const REPO_NAME = repoDat
-const { spawn } = require('child_process')
+const REPO_NAME = repoData.split('/')[1]
+const { execSync } = require('child_process')
 ;(async () => {
 	const commits = gh.commits
 	const templates = await getAllTemplates()
@@ -25,7 +25,7 @@ const { spawn } = require('child_process')
 
 				if (templatesToZip.length > 0) {
 					templatesToZip.forEach((template) => {
-						child_process.execSync(`zip zips/${template}.zip ${template}`)
+						execSync(`zip zips/${template}.zip ${template}`)
 					})
 				}
 			} else {
