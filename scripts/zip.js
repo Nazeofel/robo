@@ -42,9 +42,8 @@ const path = require('path')
 
 						execSync(`zip -r ${outputZip} templates/${templatePath}`)
 
-						const templateZippedPath = templatePath + '/' + templateName
+						const templateZippedPath = 'zips' + '/' + templatePath
 
-						console.log(templateZippedPath)
 						execSync(`b2 file upload ${BUCKET_NAME} ${outputDir} ${templateZippedPath}`)
 					})
 				}
