@@ -59,6 +59,5 @@ async function getCommittedFiles(id) {
 		if (file.filename.startsWith('templates')) {
 			return file.filename
 		}
-		return
 	})
 }
