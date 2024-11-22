@@ -45,7 +45,7 @@ const path = require('path')
 
 						execSync(`zip -r ${outputZip} templates/${templatePath}`)
 
-						execSync(`b2 upload-file ${BUCKET_NAME} ${outputDir} ${outputZip}.zip`)
+						execSync(`b2 upload-file ${BUCKET_NAME} ${outputZip}.zip ${outputZip}.zip`)
 					})
 				}
 			} else {
