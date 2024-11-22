@@ -1,6 +1,6 @@
 <p align="center">✨ <strong>Generated with <a href="https://roboplay.dev/create-robo">create-robo</a> magic!</strong> ✨</p>
 
----
+---ffg
 
 # Discord Bot - AI Chatbot (TS)
 
