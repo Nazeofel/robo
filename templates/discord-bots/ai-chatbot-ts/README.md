@@ -8,8 +8,8 @@ Welcome to your fresh **[Robo.js](https://github.com/Wave-Play/robo)** project!
 
 Embark on a journey where your Discord projects transcend the ordinary. With Robo.js as your guide, you'll experience a seamless, [file-based setup](https://docs.roboplay.dev/docs/basics/overview#the-robojs-file-structure), an [integrated database](https://docs.roboplay.dev/docs/basics/flashcore), [TypeScript support](https://docs.roboplay.dev/docs/advanced/typescript), and a multitude of [plugin-powered skills](https://docs.roboplay.dev/docs/advanced/plugins) to unlock along the way.
 
-_Ready to embark on this adventure?_
-
+_Ready to embark on thfswfwefewfis adventure?_
+wefwefwef
 ➞ [📚 **Documentation:** Getting started](https://docs.roboplay.dev/docs/getting-started)
 
 ➞ [🚀 **Community:** Join our Discord server](https://roboplay.dev/discord)
