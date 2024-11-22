@@ -33,7 +33,7 @@ const path = require('path')
 						const templateName = template.split('/')[template.split('/').length - 1]
 						const templatePath = template.slice(10)
 
-						const outputDir = path.resolve(`zips/${templatePath.replace(`/${templateName}`, '')}`)
+						const outputDir = path.join(process.cwd(), `zips/${templatePath.replace(`/${templateName}`, '')}`)
 						const outputZip = path.join(outputDir, templateName)
 
 						console.log('output dir', outputDir)
