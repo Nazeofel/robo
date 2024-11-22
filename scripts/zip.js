@@ -33,8 +33,8 @@ const path = require('path')
 						const templateName = template.split('/')[template.split('/').length - 1]
 						const templatePath = template.slice(10)
 
-						const outputDir = path.join(process.cwd(), 'zips', `${templatePath.replace(`/${templateName}`, '')}`)
-						const outputZip = path.join(outputDir, templateName)
+						const outputDir = `zips/${templatePath.replace(`/${templateName}`, '')}`
+						const outputZip = `${outputDir}/${templateName}`
 
 						console.log('output dir', outputDir)
 						console.log('output Zip', outputZip)
@@ -45,12 +45,7 @@ const path = require('path')
 
 						execSync(`zip -r ${outputZip} templates/${templatePath}`)
 
-						const templateZippedPath = 'zips' + '/' + templatePath
-
-						console.log('zipped path', templateZippedPath)
-						console.log('template path', templateZippedPath)
-
-						execSync(`b2 file upload ${BUCKET_NAME} ${outputDir} ${templateZippedPath}`)
+						execSync(`b2 file upload ${BUCKET_NAME} ${outputDir} ${templatePath}`)
 					})
 				}
 			} else {
